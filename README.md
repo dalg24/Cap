@@ -14,6 +14,7 @@ Read the Docs | documentation | [![Documentation Status](https://readthedocs.org
 Travis CI     | unit tests    | [![Build Status](https://travis-ci.org/ORNL-CEES/Cap.svg?branch=master)](https://travis-ci.org/ORNL-CEES/Cap)
 Codecov       | coverage      | [![codecov.io](https://codecov.io/github/ORNL-CEES/Cap/coverage.svg?branch=master)](https://codecov.io/github/ORNL-CEES/Cap?branch=master)
 Slack         | messaging     | [![Slack](https://img.shields.io/badge/Slack-%23cap-ff69b4.svg)](https://ornl-cees.slack.com/archives/cap)
+Jenkins       | unit tests    | [![Build Status](http://jupyterdocker.ornl.gov:8080/job/Cap/badge/icon)](http://jupyterdocker.ornl.gov:8080/job/Cap/)
 
 
 NEW - Escape dependency hell
