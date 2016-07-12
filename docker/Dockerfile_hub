@@ -1,0 +1,20 @@
+FROM dalg24/cap
+
+RUN pip install oauthenticator
+RUN env
+
+ENV OAUTHENTICATOR_DIR /srv/oauthenticator
+WORKDIR ${OAUTHENTICATOR_DIR}
+RUN mkdir -p ${OAUTHENTICATOR_DIR}
+ADD addusers.sh ${OAUTHENTICATOR_DIR}/addusers.sh
+ADD userlist ${OAUTHENTICATOR_DIR}/userlist
+#ADD ssl ${OAUTHENTICATOR_DIR}/ssl
+RUN chmod 700 ${OAUTHENTICATOR_DIR}
+
+ADD jupyterhub_config.py ${OAUTHENTICATOR_DIR}/jupyterhub_config.py
+
+
+
+RUN mkdir -p /srv/ipython/examples
+
+RUN sh ${OAUTHENTICATOR_DIR}/addusers.sh
