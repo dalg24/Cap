@@ -6,7 +6,9 @@
  */
 
 #include <cap/default_inspector.h>
+#ifdef WITH_DEAL_II
 #include <cap/supercapacitor.h>
+#endif
 #include <cap/utils.h> // to_vector<>
 
 namespace cap
@@ -19,8 +21,8 @@ std::map<std::string, double>
 extract_data_from_super_capacitor(EnergyStorageDevice *device)
 {
   std::map<std::string, double> data;
-  auto super_capacitor = dynamic_cast<SuperCapacitor<dim> *>(device);
-  if (super_capacitor)
+  #ifdef WITH_DEAL_II
+  if (auto super_capacitor = dynamic_cast<SuperCapacitor<dim> *>(device))
   {
     // get some values from the post processor
     auto post_processor = super_capacitor->get_post_processor();
@@ -70,11 +72,13 @@ extract_data_from_super_capacitor(EnergyStorageDevice *device)
   {
     throw std::runtime_error("Downcasting failed");
   }
+  #endif
   return data;
 }
 
 void DefaultInspector::inspect(EnergyStorageDevice *device)
 {
+  #ifdef WITH_DEAL_II
   if (dynamic_cast<SuperCapacitor<2> *>(device))
   {
     _data = extract_data_from_super_capacitor<2>(device);
@@ -87,6 +91,7 @@ void DefaultInspector::inspect(EnergyStorageDevice *device)
   {
     // do nothing
   }
+  #endif
 }
 
 std::map<std::string, double> DefaultInspector::get_data() const

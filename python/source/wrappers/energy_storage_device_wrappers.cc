@@ -7,7 +7,9 @@
 
 #include <pycap/energy_storage_device_wrappers.h>
 #include <cap/default_inspector.h>
+#ifdef WITH_DEAL_II
 #include <cap/supercapacitor.h>
+#endif
 #include <mpi4py/mpi4py.h>
 
 namespace pycap {
@@ -47,6 +49,7 @@ boost::python::dict inspect(cap::EnergyStorageDevice & dev,
       // with SuperCapacitorInspector<2> and if the inspect function throws then
       // we try SuperCapacitorInspector<3>.
       bool success = false;
+      #ifdef WITH_DEAL_II
       std::vector<std::shared_ptr<cap::EnergyStorageDeviceInspector>> inspectors;
       inspectors.push_back(std::shared_ptr<cap::EnergyStorageDeviceInspector> (
           new cap::SuperCapacitorInspector<2>()));
@@ -66,6 +69,7 @@ boost::python::dict inspect(cap::EnergyStorageDevice & dev,
           // If dim = 3, we will throw a runtime_error when we leave the loop.
         }
       }
+      #endif
       if (!success)
         throw std::runtime_error("The postprocessor inspector can only be used "
             "with a supercapacitor device");
