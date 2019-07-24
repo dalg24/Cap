@@ -32,7 +32,7 @@ void distributed_problem(std::shared_ptr<cap::EnergyStorageDevice> dev)
   // This is the values computed using one processor
   double const exact_voltage = 0.24307431815;
   double const time_step = 1e-2;
-  double const percent_tolerance = 1e-2;
+  double const percent_tolerance = 2e-2;
   double computed_voltage;
   double computed_current;
   for (unsigned int i = 0; i < 3; ++i)
