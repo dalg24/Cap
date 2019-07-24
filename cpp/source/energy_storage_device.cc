@@ -7,6 +7,8 @@
 
 #include <cap/energy_storage_device.h>
 
+#include <omp.h>
+
 namespace cap
 {
 
@@ -18,6 +20,7 @@ void EnergyStorageDeviceBuilder::register_energy_storage_device(
     std::string const &type, EnergyStorageDeviceBuilder *builder)
 {
   EnergyStorageDevice::_builders()[type] = builder;
+  std::ignore = omp_get_num_threads();
 }
 
 std::map<std::string, EnergyStorageDeviceBuilder *> &

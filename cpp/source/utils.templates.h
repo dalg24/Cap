@@ -11,6 +11,8 @@
 #include <boost/regex.hpp>
 #include <type_traits>
 
+#include <omp.h>
+
 namespace cap
 {
 
@@ -29,6 +31,7 @@ void filter_boolean(std::string &b)
 template <typename T>
 std::vector<T> to_vector(std::string const &s)
 {
+  std::ignore = omp_get_num_threads();
   std::vector<T> v;
   std::stringstream ss(s);
   std::string item;
