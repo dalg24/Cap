@@ -19,7 +19,7 @@ function(Cap_ADD_BOOST_TEST TEST_NAME)
     foreach(NPROC ${NUMBER_OF_PROCESSES_TO_EXECUTE})
         add_test(
             NAME ${TEST_NAME}_cpp_${NPROC}
-            COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} ${NPROC} ./${TEST_NAME}.exe
+            COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} ${NPROC} ${MPIEXEC_PREFLAGS} ./${TEST_NAME}.exe ${MPIEXEC_POSTFLAGS}
         )
         set_tests_properties(${TEST_NAME}_cpp_${NPROC} PROPERTIES
             PROCESSORS ${NPROC}
